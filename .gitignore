@@ -2,7 +2,9 @@
 .config
 .git-credential-cache
 .local
+.sqlite_history
 .npm
+*.db
 .ssh
 *.wav
 *.jpg
@@ -10,6 +12,7 @@
 *.bmp
 *.o
 *.csv
+.c9
 .bash_history
 .ikp3db
 lab1/population
@@ -31,3 +34,5 @@ pset5/speller/dictionaries
 pset5/speller/texts
 pset5/speller/keys
 pset5/speller/speller
+pset6/dna/databases
+pset6/dna/sequences
