@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+
+            //Display answer text
+            function answerText(correct,section){
+
+                if (correct) {
+                    document.getElementById(section).innerHTML = "Correct!";
+                }
+                else {
+                    document.getElementById(section).innerHTML = "Incorrect.";
+                }
+
+
+            }
+
+            function toggleButtonColor(button){
+                // Define alternative and default colors
+                let alt_color;
+                let def_color='rgb(217, 237, 255)'; //from css file
+
+                //Alternate color is red for incorrect answers, or green for correct
+                if (event.target.id=='correct') {
+                    alt_color='green';
+                }
+                else {
+                    alt_color='red';
+                }
+
+                //Get current color
+                var style = getComputedStyle(button);
+                let color = style['background-color'];
+
+                //If current color is the default color, switch to alt_color
+                if (color==def_color) {
+                    button.style.backgroundColor = alt_color;
+                }
+                // //Otherwise, return to default
+                // else {
+                //     button.style.backgroundColor = def_color;
+                // }
+            }
+
+            //Stuff on button answer
+            function answerButton(){
+                toggleButtonColor(event.target);
+                if (event.target.id =='correct') {
+                    answerText(true,'multiple_choice');
+                }
+                else {
+                    answerText(false,'multiple_choice');
+                }
+            }
+
+            function answerTextField() {
+                if (textField.value.toLowerCase() == "dalamadur") {
+                    answerText(true, "free_text");
+                }
+                else {
+                    answerText(false, "free_text");
+                }
+            }
+
+            //Add event listener to page
+            document.addEventListener('DOMContentLoaded', function() {
+                //Listen to events in the multiple choice buttons
+                buttons = document.querySelectorAll('.button');
+                buttons.forEach( function(button) {
+                    button.addEventListener('click',answerButton);
+                });
+
+                //Listen to events in the textbox+check button
+                textField = document.querySelector('.free');
+                checkButton = document.querySelector('.check');
+                checkButton.addEventListener('click', answerTextField);
+        });
+
+        </script>
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <h3>Which one of these is an Elder Dragon?</h3>
+                <h2 id='multiple_choice'></h2>
+
+                    <button class='button'>Anjanath</button>
+                    <button class='button'>Ahtal-Ka</button>
+                    <button class='button'>Ukanlos</button>
+                    <button id='correct' class='button'>Kirin</button>
+                    <button class='button'>Gore Magala</button>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <h3>Which is the currently know largest monster of all in the Monster Hunter series? No Frontier monsters allowed!</h3>
+                <h2 id='free_text'></h2>
+                <input class='free'>
+                <button class='check'>Check</button>
+
+            </div>
+
+
+
+        </div>
+    </body>
+</html>
